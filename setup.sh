@@ -272,6 +272,14 @@ echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
 wget https://raw.githubusercontent.com/hokagelegend2023/vpnpremium/main/udp-custom/udp.sh && chmod +x udp.sh && ./udp.sh
+clear
+#install ssh UDP SLOW DNS
+echo -e "\e[33m-----------------------------------\033[0m"
+echo -e "$BGreen        Install UPDATE             $NC"
+echo -e "\e[33m-----------------------------------\033[0m"
+sleep 0.5
+clear
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/update.sh chmod +x update.sh && ./update.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
