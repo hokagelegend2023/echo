@@ -1,18 +1,58 @@
 #!/bin/bash
-# cari apa..?? harta tahta hanya sementara ingat masih ada kehidupan setelah kematian
-# jangan lupa sholat ingat ajal menantimu
-# dibawah ini bukan cd kaset ya
-cd
-rm -rf setup.sh
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
+#########################
+
+BURIQ () {
+    curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip > /root/tmp
+    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
+    for user in "${data[@]}"
+    do
+    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
+    d1=(`date -d "$exp" +%s`)
+    d2=(`date -d "$biji" +%s`)
+    exp2=$(( (d1 - d2) / 86400 ))
+    if [[ "$exp2" -le "0" ]]; then
+    echo $user > /etc/.$user.ini
+    else
+    rm -f  /etc/.$user.ini > /dev/null 2>&1
+    fi
+    done
+    rm -f  /root/tmp
+}
+# https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip 
+MYIP=$(curl -sS ipv4.icanhazip.com)
+Name=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | grep $MYIP | awk '{print $2}')
+echo $Name > /usr/local/etc/.$Name.ini
+CekOne=$(cat /usr/local/etc/.$Name.ini)
+
+Bloman () {
+if [ -f "/etc/.$Name.ini" ]; then
+CekTwo=$(cat /etc/.$Name.ini)
+    if [ "$CekOne" = "$CekTwo" ]; then
+        res="Expired"
+    fi
+else
+res="Permission Accepted..."
+fi
+}
+
+PERMISSION () {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | awk '{print $4}' | grep $MYIP)
+    if [ "$MYIP" = "$IZIN" ]; then
+    Bloman
+    else
+    res="Permission Denied!"
+    fi
+    BURIQ
+}
+
 clear
 red='\e[1;31m'
 green='\e[0;32m'
 yell='\e[1;33m'
 tyblue='\e[1;36m'
-BRed='\e[1;31m'
-BGreen='\e[1;32m'
-BYellow='\e[1;33m'
-BBlue='\e[1;34m'
 NC='\e[0m'
 purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
 tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
@@ -23,14 +63,10 @@ cd /root
 #System version number
 if [ "${EUID}" -ne 0 ]; then
 		echo "You need to run this script as root"
-  sleep 5
 		exit 1
 fi
 if [ "$(systemd-detect-virt)" == "openvz" ]; then
 		echo "OpenVZ is not supported"
-  clear
-                echo "For VPS with KVM and VMWare virtualization ONLY"
-  sleep 5
 		exit 1
 fi
 
@@ -40,48 +76,47 @@ dart=$(cat /etc/hosts | grep -w `hostname` | awk '{print $2}')
 if [[ "$hst" != "$dart" ]]; then
 echo "$localip $(hostname)" >> /etc/hosts
 fi
-# buat folder
 mkdir -p /etc/xray
-mkdir -p /etc/v2ray
-touch /etc/xray/domain
-touch /etc/v2ray/domain
-touch /etc/xray/scdomain
-touch /etc/v2ray/scdomain
 
-
-echo -e "[ ${BBlue}NOTES${NC} ] Before we go.. "
-sleep 0.5
-echo -e "[ ${BBlue}NOTES${NC} ] I need check your headers first.."
-sleep 0.5
-echo -e "[ ${BGreen}INFO${NC} ] Checking headers"
-sleep 0.5
+echo -e "[ ${tyblue}NOTES${NC} ] Before we go.. "
+sleep 1
+echo -e "[ ${tyblue}NOTES${NC} ] I need check your headers first.."
+sleep 2
+echo -e "[ ${green}INFO${NC} ] Checking headers"
+sleep 1
 totet=`uname -r`
 REQUIRED_PKG="linux-headers-$totet"
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
 echo Checking for $REQUIRED_PKG: $PKG_OK
 if [ "" = "$PKG_OK" ]; then
-  sleep 0.5
-  echo -e "[ ${BRed}WARNING${NC} ] Try to install ...."
+  sleep 2
+  echo -e "[ ${yell}WARNING${NC} ] Try to install ...."
   echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
   apt-get --yes install $REQUIRED_PKG
-  sleep 0.5
+  sleep 1
   echo ""
-  sleep 0.5
-  echo -e "[ ${BBlue}NOTES${NC} ] If error you need.. to do this"
-  sleep 0.5
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] If error you need.. to do this"
+  sleep 1
   echo ""
-  sleep 0.5
-  echo -e "[ ${BBlue}NOTES${NC} ] apt update && apt upgrade -y && reboot"
-  sleep 0.5
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] 1. apt update -y"
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] 2. apt upgrade -y"
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] 3. apt dist-upgrade -y"
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] 4. reboot"
+  sleep 1
   echo ""
-  sleep 0.5
-  echo -e "[ ${BBlue}NOTES${NC} ] After this"
-  sleep 0.5
-  echo -e "[ ${BBlue}NOTES${NC} ] Then run this script again"
-  echo -e "[ ${BBlue}NOTES${NC} ] enter now"
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] After rebooting"
+  sleep 1
+  echo -e "[ ${tyblue}NOTES${NC} ] Then run this script again"
+  echo -e "[ ${tyblue}NOTES${NC} ] if you understand then tap enter now"
   read
 else
-  echo -e "[ ${BGreen}INFO${NC} ] Oke installed"
+  echo -e "[ ${green}INFO${NC} ] Oke installed"
 fi
 
 ttet=`uname -r`
@@ -102,44 +137,114 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sysctl -w net.ipv6.conf.all.disable_ipv6=1 >/dev/null 2>&1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1 >/dev/null 2>&1
 
-echo -e "[ ${BGreen}INFO${NC} ] Preparing the install file"
+coreselect=''
+cat> /root/.profile << END
+# ~/.profile: executed by Bourne-compatible login shells.
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+
+mesg n || true
+clear
+END
+chmod 644 /root/.profile
+
+echo -e "[ ${green}INFO${NC} ] Preparing the install file"
 apt install git curl -y >/dev/null 2>&1
-apt install python -y >/dev/null 2>&1
-echo -e "[ ${BGreen}INFO${NC} ] Aight good ... installation file is ready"
-sleep 0.5
-echo -ne "[ ${BGreen}INFO${NC} ] Check permission : "
-
-echo -e "$BGreen Permission Accepted!$NC"
+echo -e "[ ${green}INFO${NC} ] Aight good ... installation file is ready"
 sleep 2
+echo -ne "[ ${green}INFO${NC} ] Check permission : "
 
-mkdir -p /var/lib/ >/dev/null 2>&1
-echo "IP=" >> /var/lib/ipvps.conf
+PERMISSION
+if [ -f /home/needupdate ]; then
+red "Your script need to update first !"
+exit 0
+elif [ "$res" = "Permission Accepted..." ]; then
+green "Permission Accepted!"
+else
+red "Permission Denied!"
+rm setup.sh > /dev/null 2>&1
+sleep 10
+exit 0
+fi
+sleep 3
+
+mkdir -p /etc/hokagevpn
+mkdir -p /etc/hokagevpn/theme
+mkdir -p /var/lib/hokagevpn-pro >/dev/null 2>&1
+echo "IP=" >> /var/lib/hokagevpn-pro/ipvps.conf
+mkdir -p /etc/xray
+mkdir -p /etc/v2ray
+touch /etc/xray/domain
+touch /etc/v2ray/domain
+touch /etc/xray/scdomain
+touch /etc/v2ray/scdomain
+if [ -f "/etc/xray/domain" ]; then
+echo ""
+echo -e "[ ${green}INFO${NC} ] Script Already Installed"
+echo -ne "[ ${yell}WARNING${NC} ] Do you want to install again ? (y/n)? "
+read answer
+if [ "$answer" == "${answer#[Yy]}" ] ;then
+rm setup.sh
+sleep 10
+exit 0
+else
+clear
+fi
+fi
 
 echo ""
+wget -q https://raw.githubusercontent.com/hokagelegend2023/original/main/dependencies.sh;chmod +x dependencies.sh;./dependencies.sh
+rm dependencies.sh
 clear
-echo -e "$BBlue                     SETUP DOMAIN VPS     $NC"
-echo -e "$BYellow----------------------------------------------------------$NC"
-echo -e "$BGreen 1. Use Domain Random / Gunakan Domain Random $NC"
-echo -e "$BGreen 2. Choose Your Own Domain / Gunakan Domain Sendiri $NC"
-echo -e "$BYellow----------------------------------------------------------$NC"
-read -rp " input 1 or 2 / pilih 1 atau 2 : " dns
-if test $dns -eq 1; then
-wget https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/cf && chmod +x cf && ./cf
-elif test $dns -eq 2; then
-read -rp "Enter Your Domain / masukan domain : " dom
-echo "IP=$dom" > /var/lib/ipvps.conf
-echo "$dom" > /root/scdomain
-echo "$dom" > /etc/xray/scdomain
-echo "$dom" > /etc/xray/domain
-echo "$dom" > /etc/v2ray/domain
-echo "$dom" > /root/domain
-else 
-echo "Not Found Argument"
-exit 1
-fi
-echo -e "${BGreen}Done!${NC}"
-sleep 2
-clear
+
+yellow "Add Domain for vmess/vless/trojan dll"
+echo " "
+read -rp "Input ur domain : " -e pp
+echo "$pp" > /root/domain
+echo "$pp" > /root/scdomain
+echo "$pp" > /etc/xray/domain
+echo "$pp" > /etc/xray/scdomain
+echo "$pp" > /etc/v2ray/domain
+echo "IP=$pp" > /var/lib/hokagevpn-pro/ipvps.conf
+
+#THEME RED
+cat <<EOF>> /etc/hokagevpn/theme/red
+BG : \E[40;1;41m
+TEXT : \033[0;31m
+EOF
+#THEME BLUE
+cat <<EOF>> /etc/hokagevpn/theme/blue
+BG : \E[40;1;44m
+TEXT : \033[0;34m
+EOF
+#THEME GREEN
+cat <<EOF>> /etc/hokagevpn/theme/green
+BG : \E[40;1;42m
+TEXT : \033[0;32m
+EOF
+#THEME YELLOW
+cat <<EOF>> /etc/hokagevpn/theme/yellow
+BG : \E[40;1;43m
+TEXT : \033[0;33m
+EOF
+#THEME MAGENTA
+cat <<EOF>> /etc/hokagevpn/theme/magenta
+BG : \E[40;1;43m
+TEXT : \033[0;33m
+EOF
+#THEME CYAN
+cat <<EOF>> /etc/hokagevpn/theme/cyan
+BG : \E[40;1;46m
+TEXT : \033[0;36m
+EOF
+#THEME CONFIG
+cat <<EOF>> /etc/hokagevpn/theme/color.conf
+blue
+EOF
     
 #install ssh ovpn
 echo -e "\e[33m-----------------------------------\033[0m"
@@ -147,15 +252,15 @@ echo -e "$BGreen      Install SSH Websocket           $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #Instal Xray
 echo -e "\e[33m-----------------------------------\033[0m"
 echo -e "$BGreen          Install XRAY              $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://raw.githubusercontent.com/givpn/AutoScriptXray/master/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-wget https://raw.githubusercontent.com/givpn/AutoScriptXray/master/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 clear
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
@@ -194,8 +299,8 @@ if [ ! -f "/etc/log-create-shadowsocks.log" ]; then
 echo "Log Shadowsocks Account " > /etc/log-create-shadowsocks.log
 fi
 history -c
-serverV=$( curl -sS https://raw.githubusercontent.com/givpn/AutoScriptXray/master/menu/versi  )
-echo $serverV > /opt/.ver
+serverV=$( curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echo-versi  )
+echo $serverV > /opt/echo-versi
 aureb=$(cat /home/re_otm)
 b=11
 if [ $aureb -gt $b ]
@@ -207,17 +312,26 @@ fi
 curl -sS ipv4.icanhazip.com > /etc/myipvps
 echo ""
 echo "=================================================================="  | tee -a log-install.txt
-echo "      ___                                    ___         ___      "  | tee -a log-install.txt
-echo "     /  /\        ___           ___         /  /\       /__/\     "  | tee -a log-install.txt
-echo "    /  /:/_      /  /\         /__/\       /  /::\      \  \:\    "  | tee -a log-install.txt
-echo "   /  /:/ /\    /  /:/         \  \:\     /  /:/\:\      \  \:\   "  | tee -a log-install.txt
-echo "  /  /:/_/::\  /__/::\          \  \:\   /  /:/~/:/  _____\__\:\  "  | tee -a log-install.txt
-echo " /__/:/__\/\:\ \__\/\:\__   ___  \__\:\ /__/:/ /:/  /__/::::::::\ "  | tee -a log-install.txt
-echo " \  \:\ /~~/:/    \  \:\/\ /__/\ |  |:| \  \:\/:/   \  \:\~~\~~\/ "  | tee -a log-install.txt
-echo "  \  \:\  /:/      \__\::/ \  \:\|  |:|  \  \::/     \  \:\  ~~~  "  | tee -a log-install.txt
-echo "   \  \:\/:/       /__/:/   \  \:\__|:|   \  \:\      \  \:\      "  | tee -a log-install.txt
-echo "    \  \::/        \__\/     \__\::::/     \  \:\      \  \:\     "  | tee -a log-install.txt
-echo "     \__\/                       ~~~~       \__\/       \__\/ 1.0 "  | tee -a log-install.txt
+echo "                                                                  "  | tee -a log-install.txt
+echo " /$$   /$$  /$$$$$$  /$$   /$$  /$$$$$$   /$$$$$$  /$$$$$$$$      "  | tee -a log-install.txt
+echo "| $$  | $$ /$$__  $$| $$  /$$/ /$$__  $$ /$$__  $$| $$_____/      "  | tee -a log-install.txt
+echo "| $$  | $$| $$  \ $$| $$ /$$/ | $$  \ $$| $$  \__/| $$            "  | tee -a log-install.txt
+echo "| $$$$$$$$| $$  | $$| $$$$$/  | $$$$$$$$| $$ /$$$$| $$$$$         "  | tee -a log-install.txt
+echo "| $$__  $$| $$  | $$| $$  $$  | $$__  $$| $$|_  $$| $$__/         "  | tee -a log-install.txt
+echo "| $$  | $$| $$  | $$| $$\  $$ | $$  | $$| $$  \ $$| $$            "  | tee -a log-install.txt
+echo "| $$  | $$|  $$$$$$/| $$ \  $$| $$  | $$|  $$$$$$/| $$$$$$$$      "  | tee -a log-install.txt
+echo "|__/  |__/ \______/ |__/  \__/|__/  |__/ \______/ |________/      "  | tee -a log-install.txt                                                           
+      echo "                                                            "  | tee -a log-install.txt
+      echo "                                                            "  | tee -a log-install.txt
+      echo " /$$       /$$$$$$$$  /$$$$$$  /$$$$$$$$ /$$   /$$ /$$$$$$$ "  | tee -a log-install.txt
+      echo "| $$      | $$_____/ /$$__  $$| $$_____/| $$$ | $$| $$__  $$"  | tee -a log-install.txt
+      echo "| $$      | $$      | $$  \__/| $$      | $$$$| $$| $$  \ $$"  | tee -a log-install.txt
+      echo "| $$      | $$$$$   | $$ /$$$$| $$$$$   | $$ $$ $$| $$  | $$"  | tee -a log-install.txt
+      echo "| $$      | $$__/   | $$|_  $$| $$__/   | $$  $$$$| $$  | $$"  | tee -a log-install.txt
+      echo "| $$      | $$      | $$  \ $$| $$      | $$\  $$$| $$  | $$"  | tee -a log-install.txt
+      echo "| $$$$$$$$| $$$$$$$$|  $$$$$$/| $$$$$$$$| $$ \  $$| $$$$$$$/"  | tee -a log-install.txt
+      echo "|________/|________/ \______/ |________/|__/  \__/|_______/ "  | tee -a log-install.txt
+      echo "                                                            "  | tee -a log-install.txt
 echo "=================================================================="  | tee -a log-install.txt
 echo ""
 echo "   >>> Service & Port"  | tee -a log-install.txt
@@ -242,7 +356,9 @@ echo "   - Trojan gRPC              : 443" | tee -a log-install.txt
 echo "   - Shadowsocks gRPC         : 443" | tee -a log-install.txt
 echo ""
 echo "=============================Contact==============================" | tee -a log-install.txt
-echo "---------------------------t.me/givpn-----------------------------" | tee -a log-install.txt
+echo "----------------------t.me/hokagevpnpremium-----------------------" | tee -a log-install.txt
+echo "==================================================================" | tee -a log-install.txt
+echo "----------------------WHATSAPP:087726917005-----------------------" | tee -a log-install.txt
 echo "==================================================================" | tee -a log-install.txt
 echo -e ""
 echo ""
