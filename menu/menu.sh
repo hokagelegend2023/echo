@@ -78,7 +78,7 @@ export GREEN='\033[0;32m'
 # // SSH Websocket Proxy
 ssh_ws=$( systemctl status ws-stunnel | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $ssh_ws == "running" ]]; then
-    status_ws="${GREEN}ON${NC}"
+    status_ws="${GREEN}RUN${NC}"
 else
     status_ws="${RED}OFF${NC}"
 fi
@@ -86,7 +86,7 @@ fi
 # // nginx
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $nginx == "running" ]]; then
-    status_nginx="${GREEN}ON${NC}"
+    status_nginx="${GREEN}RUN${NC}"
 else
     status_nginx="${RED}OFF${NC}"
 fi
@@ -94,7 +94,7 @@ fi
 # // SSH Websocket Proxy
 xray=$( systemctl status xray | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $xray == "running" ]]; then
-    status_xray="${GREEN}ON${NC}"
+    status_xray="${GREEN}RUN${NC}"
 else
     status_xray="${RED}OFF${NC}"
 fi
@@ -133,11 +133,11 @@ echo -e "$COLOR1└────────────────────�
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Check for Script updates"
 sleep 2
-wget -q -O /root/update.sh "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/update.sh" && chmod +x /root/update.sh
+wget -q -O /root/e-update.sh "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh" && chmod +x /root/e-update.sh
 sleep 2
-./update.sh
+./e-update.sh
 sleep 5
-rm /root/install_up.sh
+rm /root/e-update.sh
 rm /opt/echo-versi
 version_up=$( curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echo-versi)
 echo "$version_up" > /opt/echo-versi
@@ -154,7 +154,7 @@ clear
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC} ${COLBG1}               • VPS PANEL MENU •              ${NC} $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1<<─────────────────────────────────────────────────>>${NC}"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
@@ -166,31 +166,31 @@ uis="${GREEN}Premium User$NC"
 else
 uis="${RED}Free Version$NC"
 fi
-echo -e "$COLOR1│$NC User Roles     : $uis"
+echo -e "$COLOR1 $NC User Roles     : $uis"
 if [ "$cekup" = "day" ]; then
-echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes $uptimecek"
+echo -e "$COLOR1 $NC System Uptime  : $uphours $upminutes $uptimecek"
 else
-echo -e "$COLOR1│$NC System Uptime  : $uphours $upminutes"
+echo -e "$COLOR1 $NC System Uptime  : $uphours $upminutes"
 fi
-echo -e "$COLOR1│$NC Memory Usage   : $uram / $tram"
-echo -e "$COLOR1│$NC ISP            : $ISP"
-echo -e "$COLOR1│$NC City           : $CITY"
-echo -e "$COLOR1│$NC Current Domain : $(cat /etc/xray/domain)"
-echo -e "$COLOR1│$NC IP-VPS         : ${COLOR1}$IPVPS${NC}"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "$COLOR1 $NC Memory Usage   : $uram / $tram"
+echo -e "$COLOR1 $NC ISP            : $ISP"
+echo -e "$COLOR1 $NC City           : $CITY"
+echo -e "$COLOR1 $NC Current Domain : $(cat /etc/xray/domain)"
+echo -e "$COLOR1 $NC IP-VPS         : ${COLOR1}$IPVPS${NC}"
+echo -e "$COLOR1<<─────────────────────────────────────────────────>>${NC}"
+echo -e "$COLOR1┌────────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│$NC [ SSH WS : ${status_ws} ]  [ XRAY : ${status_xray} ]   [ NGINX : ${status_nginx} ] $COLOR1│$NC"
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "$COLOR1└────────────────────────────────────────────────────┘${NC}"
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
-echo -e "  ${COLOR1}[01]${NC} • SSHWS   [${YELLOW}Menu${NC}]   ${COLOR1}[07]${NC} • THEME    [${YELLOW}Menu${NC}]  $COLOR1│$NC"   
-echo -e "  ${COLOR1}[02]${NC} • VMESS   [${YELLOW}Menu${NC}]   ${COLOR1}[08]${NC} • BACKUP   [${YELLOW}Menu${NC}]  $COLOR1│$NC"  
-echo -e "  ${COLOR1}[03]${NC} • VLESS   [${YELLOW}Menu${NC}]   ${COLOR1}[09]${NC} • ADD HOST/DOMAIN  $COLOR1│$NC"  
-echo -e "  ${COLOR1}[04]${NC} • TROJAN  [${YELLOW}Menu${NC}]   ${COLOR1}[10]${NC} • RENEW CERT       $COLOR1│$NC"  
-echo -e "  ${COLOR1}[05]${NC} • SS WS   [${YELLOW}Menu${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]  $COLOR1│$NC"
-echo -e "  ${COLOR1}[06]${NC} • UPDATE  [${YELLOW}Menu${NC}]   ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]  $COLOR1│$NC"
+echo -e "${COLOR1}│$NC[01]${NC} • SSHWS   [${YELLOW}Menu${NC}]   ${COLOR1}[07]${NC} • THEME    [${YELLOW}Menu${NC}]   $COLOR1│$NC"   
+echo -e "${COLOR1}│$NC[02]${NC} • VMESS   [${YELLOW}Menu${NC}]   ${COLOR1}[08]${NC} • BACKUP   [${YELLOW}Menu${NC}]   $COLOR1│$NC"  
+echo -e "${COLOR1}│$NC[03]${NC} • VLESS   [${YELLOW}Menu${NC}]   ${COLOR1}[09]${NC} • ADD HOST/DOMAIN   $COLOR1│$NC"  
+echo -e "${COLOR1}│$NC[04]${NC} • TROJAN  [${YELLOW}Menu${NC}]   ${COLOR1}[10]${NC} • RENEW CERT        $COLOR1│$NC"  
+echo -e "${COLOR1}│$NC[05]${NC} • SS WS   [${YELLOW}Menu${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]   $COLOR1│$NC"
+echo -e "${COLOR1}│$NC[06]${NC} • UPDATE  [${YELLOW}Menu${NC}]   ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]   $COLOR1│$NC"
 if [ "$Isadmin" = "ON" ]; then
-echo -e "                                                  $COLOR1│$NC"
-echo -e "  ${COLOR1}[13]${NC} • REG IP  [${YELLOW}Menu${NC}]   ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]  $COLOR1│$NC"
+echo -e "${COLOR1}│$NC                                                 $COLOR1│$NC"
+echo -e "${COLOR1}│$NC[13]${NC} • REG IP  [${YELLOW}Menu${NC}]   ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]   $COLOR1│$NC"
 ressee="menu-ip"
 bottt="menu-bot"
 else
@@ -218,17 +218,17 @@ datediff() {
 mai="datediff "$Exp" "$DATE""
 
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐$NC"
-echo -e "$COLOR1│$NC Version     :${COLOR1} $(cat /opt/echo-versi) Latest Version${NC}"
-echo -e "$COLOR1│$NC Client Name : $Name"
+echo -e "$COLOR1│$NC Version     :${COLOR1} $(cat /opt/echo-versi)           $COLOR1│$NC"
+echo -e "$COLOR1│$NC Client Name : $Name                           $COLOR1│$NC"
 if [ $exp \> 1000 ];
 then
-    echo -e "$COLOR1│$NC License     : Lifetime"
+    echo -e "$COLOR1│$NC License     : Lifetime                          $COLOR1│$NC"
 else
     datediff "$Exp" "$DATE"
 fi;
 echo -e "$COLOR1└─────────────────────────────────────────────────┘$NC"
 echo -e "$COLOR1┌────────────────────── BY ───────────────────────┐${NC}"
-echo -e "$COLOR1│${NC}              • HOKAGE LEGEND •            $COLOR1│$NC"
+echo -e "$COLOR1│${NC}              • HOKAGE LEGEND •                  $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}" 
 echo -e ""
 echo -ne " Select menu : "; read opt
