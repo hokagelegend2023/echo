@@ -279,7 +279,7 @@ echo -e "$BGreen        Install UPDATE             $NC"
 echo -e "\e[33m-----------------------------------\033[0m"
 sleep 0.5
 clear
-wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/update.sh chmod +x update.sh && ./update.sh
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh chmod +x e-update.sh && ./e-update.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
