@@ -389,5 +389,7 @@ echo -e ""
 echo " Auto reboot in 10 Seconds "
 sleep 10
 rm -rf setup.sh
+rm -rf insshws.sh  
+rm -rf ins-xray.sh 
 reboot
 
