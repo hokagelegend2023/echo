@@ -174,8 +174,10 @@ sleep 3
 
 mkdir -p /etc/hokagevpn
 mkdir -p /etc/hokagevpn/theme
+mkdir -p /var/lib >/dev/null 2>&1
 mkdir -p /var/lib/hokagevpn-pro >/dev/null 2>&1
 echo "IP=" >> /var/lib/hokagevpn-pro/ipvps.conf
+echo "IP=" >> /var/lib/ipvps.conf
 mkdir -p /etc/xray
 mkdir -p /etc/v2ray
 touch /etc/xray/domain
