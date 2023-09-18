@@ -11,7 +11,7 @@ rm info
 echo -e " [INFO] Downloading Update File"
 sleep 2
 wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/hokagelegend2023/echo/main/menu/menu.sh" && chmod +x /usr/bin/menu
-wget -q -O /root/log-install.txt https://raw.githubusercontent.com/hokagelegend2023/vpnpremium/main/update/log-install.txt
+wget -q -O /root/log-install.txt "https://raw.githubusercontent.com/hokagelegend2023/vpnpremium/main/update/log-install.txt"
 wget -q -O /usr/bin/e-update "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh" && chmod +x /usr/bin/e-update
 wget -q -O /usr/bin/info "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/info.sh" && chmod +x /usr/bin/info
 echo -e " [INFO] Update Successfully"
