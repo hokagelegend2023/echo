@@ -262,6 +262,13 @@ clear
 wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 clear
+#install ssh UDP SLOW DNS
+echo -e "\e[33m-----------------------------------\033[0m"
+echo -e "$BGreen      Install UDP SLOW DNS         $NC"
+echo -e "\e[33m-----------------------------------\033[0m"
+sleep 0.5
+clear
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/udp-custom/udp.sh && chmod +x udp.sh && ./udp.sh
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
