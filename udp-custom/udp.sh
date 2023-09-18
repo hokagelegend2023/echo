@@ -1,12 +1,7 @@
 #!/bin/bash
-# Script UdpCustom 2023
-# Script By MARDHEX
-# https://t.me/mdxdev
 # =========================================
 # Quick Setup | Script Setup Manager
-# Edition : Stable Edition 1.0
-# Auther  : givpn
-# Kuota Habisss
+# Edition : ECHO STABLE 2.0
 # (C) Copyright 2023
 # =========================================
 # pewarna hidup
