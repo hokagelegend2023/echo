@@ -133,9 +133,7 @@ echo -e "$COLOR1└────────────────────�
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC}  $COLOR1[INFO]${NC} Check for Script updates"
 sleep 2
-wget -q -O /root/e-update.sh "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh" && chmod +x /root/e-update.sh
-sleep 2
-./e-update.sh
+wget -q -O /root/e-update.sh "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh" && chmod +x /root/e-update.sh && ./e-update.sh
 sleep 5
 rm /root/e-update.sh
 rm /opt/echo-versi
