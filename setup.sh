@@ -265,6 +265,14 @@ clear
 wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/websocket/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 clear
+#install BACK UP VPS
+echo -e "\e[33m-----------------------------------\033[0m"
+echo -e "$BGreen      Install BACKUP VPS        $NC"
+echo -e "\e[33m-----------------------------------\033[0m"
+sleep 0.5
+clear
+wget https://raw.githubusercontent.com/hokagelegend2023/echo/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+clear
 #install ssh UDP SLOW DNS
 echo -e "\e[33m-----------------------------------\033[0m"
 echo -e "$BGreen      Install UDP SLOW DNS         $NC"
