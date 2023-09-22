@@ -41,8 +41,8 @@ BURIQ () {
 }
 
 MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ipmini/main/ijin | grep $MYIP | awk '{print $2}')
-Isadmin=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ipmini/main/ijin | grep $MYIP | awk '{print $5}')
+Name=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | grep $MYIP | awk '{print $2}')
+Isadmin=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | grep $MYIP | awk '{print $5}')
 echo $Name > /usr/local/etc/.$Name.ini
 CekOne=$(cat /usr/local/etc/.$Name.ini)
 
@@ -59,7 +59,7 @@ fi
 
 PERMISSION () {
     MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ipmini/main/ijin | awk '{print $4}' | grep $MYIP)
+    IZIN=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | awk '{print $4}' | grep $MYIP)
     if [ "$MYIP" = "$IZIN" ]; then
     Bloman
     else
@@ -77,7 +77,7 @@ if [ "$res" = "Expired" ]; then
 Exp="\e[36mExpired\033[0m"
 rm -f /home/needupdate > /dev/null 2>&1
 else
-Exp=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ipmini/main/ijin | grep $MYIP | awk '{print $3}')
+Exp=$(curl -sS https://raw.githubusercontent.com/hokagelegend2023/ijinpremium/main/echoip | grep $MYIP | awk '{print $3}')
 fi
 
 function botonoff(){
@@ -100,7 +100,7 @@ echo "Admin_ID: $adm_ids" >>/root/ResBotAuth
 }
 echo -ne " BOT NAMME : "
 read bot_user
-[[ -z $bot_user ]] && bot_user="YokkoEddyStore"
+[[ -z $bot_user ]] && bot_user="HokageLegend"
 echo ""
 echo -ne " LIMIT     : "
 read limit_pnl
