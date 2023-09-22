@@ -21,9 +21,6 @@ wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/hokagelegend2
 sleep 2
 echo -e " [INFO] Downloading Update System"
 sleep 2
-
-sleep 2
-rm insshws.sh
 echo -e " [INFO] Update Successfully"
 sleep 2
 exit
