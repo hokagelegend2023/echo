@@ -182,19 +182,22 @@ echo -e "$COLOR1└────────────────────�
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "${COLOR1}│$NC[01]${NC} • SSHWS   [${YELLOW}Menu${NC}]   ${COLOR1}[07]${NC} • THEME    [${YELLOW}Menu${NC}]   $COLOR1│$NC"   
 echo -e "${COLOR1}│$NC[02]${NC} • VMESS   [${YELLOW}Menu${NC}]   ${COLOR1}[08]${NC} • BACKUP   [${YELLOW}Menu${NC}]   $COLOR1│$NC"  
-echo -e "${COLOR1}│$NC[03]${NC} • VLESS   [${YELLOW}Menu${NC}]   ${COLOR1}[09]${NC} • ADD HOST/DOMAIN   $COLOR1│$NC"  
-echo -e "${COLOR1}│$NC[04]${NC} • TROJAN  [${YELLOW}Menu${NC}]   ${COLOR1}[10]${NC} • RENEW CERT        $COLOR1│$NC"  
+echo -e "${COLOR1}│$NC[03]${NC} • VLESS   [${YELLOW}Menu${NC}]   ${COLOR1}[09]${NC} • REG IP   [${YELLOW}Menu${NC}]   $COLOR1│$NC"  
+echo -e "${COLOR1}│$NC[04]${NC} • TROJAN  [${YELLOW}Menu${NC}]   ${COLOR1}[10]${NC} • SET BOOT [${YELLOW}Menu${NC}]   $COLOR1│$NC"  
 echo -e "${COLOR1}│$NC[05]${NC} • SS WS   [${YELLOW}Menu${NC}]   ${COLOR1}[11]${NC} • SETTINGS [${YELLOW}Menu${NC}]   $COLOR1│$NC"
 echo -e "${COLOR1}│$NC[06]${NC} • UPDATE  [${YELLOW}Menu${NC}]   ${COLOR1}[12]${NC} • INFO     [${YELLOW}Menu${NC}]   $COLOR1│$NC"
 if [ "$Isadmin" = "ON" ]; then
 echo -e "${COLOR1}│$NC                                                 $COLOR1│$NC"
-echo -e "${COLOR1}│$NC[13]${NC} • REG IP  [${YELLOW}Menu${NC}]   ${COLOR1}[14]${NC} • SET BOT  [${YELLOW}Menu${NC}]   $COLOR1│$NC"
 ressee="menu-ip"
 bottt="menu-bot"
 else
 ressee="menu"
 bottt="menu"
 fi
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
+echo -e "${COLOR1}                                                $NC"
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
+echo -e "${COLOR1}│$NC[13]${NC} • ADD HOST/DOMAIN     ${COLOR1}[14]${NC} • RENEW CERT     $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
 myver="$(cat /opt/echo-versi)"
 
@@ -239,12 +242,12 @@ case $opt in
 06 | 6) clear ; e-update ;;
 06 | 7) clear ; menu-theme ;;
 07 | 8) clear ; menu-backup ;;
-09 | 9) clear ; m-domain ;;
-10) clear ; certv2ray ;;
+09 | 9) clear ; $ressee ;;
+10) clear ; $bottt ;;
 11) clear ; m-system ;;
 12) clear ; info ;;
-13) clear ; $ressee ;;
-14) clear ; $bottt ;;
+13) clear ; m-domain ;;
+14) clear ; certv2ray ;;
 100) clear ; $up2u ;;
 00 | 0) clear ; menu ;;
 *) clear ; menu ;;
