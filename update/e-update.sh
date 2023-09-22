@@ -18,6 +18,9 @@ wget -q -O /root/log-install.txt "https://raw.githubusercontent.com/hokagelegend
 wget -q -O /usr/bin/e-update "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/e-update.sh" && chmod +x /usr/bin/e-update
 wget -q -O /usr/bin/info "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/info.sh" && chmod +x /usr/bin/info
 wget -q -O /usr/bin/menu-backup "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/menu-backup.sh" && chmod +x /usr/bin/menu-backup
+wget -q -O /usr/bin/menu-theme "https://raw.githubusercontent.com/hokagelegend2023/echo/main/update/menu-theme.sh" && chmod +x /usr/bin/menu-theme
+wget -q -O /usr/bin/menu-ip "https://raw.githubusercontent.com/hokagelegend2023/echo/main/menu/menu-ip.sh" && chmod +x /usr/bin/menu-ip
+wget -q -O /usr/bin/menu-bot "https://raw.githubusercontent.com/hokagelegend2023/echo/main/menu/menu-bot.sh" && chmod +x /usr/bin/menu-bot
 sleep 2
 echo -e " [INFO] Downloading Update System"
 sleep 2
