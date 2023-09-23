@@ -86,7 +86,7 @@ echo -e "[ ${green}INFO${NC} ] TANPA HEADER INSTALL"
 sleep 1
 
 #### DISINI HEADER ####
-=====================
+echo -e "[ ${green}Lewati Header check${NC} ]====================="
 secs_to_human() {
     echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
 }
