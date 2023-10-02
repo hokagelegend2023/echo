@@ -292,16 +292,16 @@ clear
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC} ${COLBG1}           • CREATE TROJAN USER •              ${NC} $COLOR1│$NC"
 echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"
-echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"    | tee -a /etc/log-create-vmess.log
-echo -e "$COLOR1│${NC} Remarks     : ${user}"                                | tee -a /etc/log-create-vmess.log
-echo -e "$COLOR1│${NC} Expired On  : $exp"                                   | tee -a /etc/log-create-vmess.log
+echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"    | tee -a /etc/log-create-trojan.log
+echo -e "$COLOR1│${NC} Remarks     : ${user}"                                | tee -a /etc/log-create-trojan.log
+echo -e "$COLOR1│${NC} Expired On  : $exp"                                   | tee -a /etc/log-create-trojan.log
 echo -e "$COLOR1│${NC} Host/IP     : ${domain}" 
 echo -e "$COLOR1│${NC} Port        : ${tr}" 
-echo -e "$COLOR1│${NC} Key         : ${uuid}"                                | tee -a /etc/log-create-vmess.log
-echo -e "$COLOR1│${NC} Path        : /trojan-ws"                             | tee -a /etc/log-create-vmess.log
+echo -e "$COLOR1│${NC} Key         : ${uuid}"                                | tee -a /etc/log-create-trojan.log
+echo -e "$COLOR1│${NC} Path        : /trojan-ws"                             | tee -a /etc/log-create-trojan.log
 echo -e "$COLOR1│${NC} Path WSS    : wss://who.int/trojan-ws" 
-echo -e "$COLOR1│${NC} ServiceName : trojan-grpc"                            | tee -a /etc/log-create-vmess.log
-echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"    | tee -a /etc/log-create-vmess.log
+echo -e "$COLOR1│${NC} ServiceName : trojan-grpc"                            | tee -a /etc/log-create-trojan.log
+echo -e "$COLOR1└─────────────────────────────────────────────────┘${NC}"    | tee -a /etc/log-create-trojan.log
 echo -e "$COLOR1┌─────────────────────────────────────────────────┐${NC}"
 echo -e "$COLOR1│${NC} Link WS : "
 echo -e "$COLOR1│${NC} ${trojanlink}" 
